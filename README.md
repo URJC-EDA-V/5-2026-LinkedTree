@@ -1,4 +1,10 @@
-# Implementación de árboles n-arios
-
-Partiendo de la interfaz NAryTree realizar la implementación del LinkedTree. 
-A continuación realiza la implementación del iterador DepthFirstTreeIterator, que realiza un recorrido en profundidad del árbol.
+# Ejercicio de LinkedTree
+ 
+### Información del Proyecto
+ 
+| Descripción   | Detalles                           |
+|---------------|------------------------------------|
+| Profesores    | Sergio Cavero, Javier Yuste y María Teresa González de Lena   |
+| Asignatura    | Estructuras de Datos Avanzadas     |
+| Universidad   | Universidad Rey Juan Carlos        |
+| Licencia      | CC BY-NC-SA 4.0                    
