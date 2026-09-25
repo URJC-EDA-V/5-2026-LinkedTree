@@ -1,4 +1,5 @@
 import es.urjc.grafo.EDA.trees.DepthFirstTreeIterator;
+import es.urjc.grafo.EDA.trees.DepthFirstTreePositionsIterator;
 import es.urjc.grafo.EDA.trees.LinkedTree;
 import es.urjc.grafo.EDA.utils.Position;
 import org.junit.jupiter.api.Assertions;
@@ -110,7 +111,7 @@ public class LinkedTreeTest {
 		this.tree.add("2", p);
 		this.tree.add("3", p);
 		String salida = "";
-		for (Position<String> e : this.tree) {
+		for (Position<String> e : this.tree.positions()) {
 			salida += e.getElement();
 		}
 		Assertions.assertEquals(salida, "+23");
@@ -168,7 +169,7 @@ public class LinkedTreeTest {
 		this.tree.remove(p2);
 
 		StringBuilder s = new StringBuilder();
-		for (Position<String> pos : this.tree) {
+		for (Position<String> pos : this.tree.positions()) {
 			s.append(pos.getElement());
 		}
 		Assertions.assertEquals(s.toString(), "ABCDE");
@@ -228,7 +229,7 @@ public class LinkedTreeTest {
 		this.setTree();
 
 		StringBuilder s = new StringBuilder();
-		for (Position<String> pos : this.tree) {
+		for (Position<String> pos : this.tree.positions()) {
 			s.append(pos.getElement());
 		}
 		System.out.println(s.toString());
@@ -242,7 +243,7 @@ public class LinkedTreeTest {
 		this.setTree();
 
 		StringBuilder s = new StringBuilder();
-		Iterator<Position<String>> iterator = new DepthFirstTreeIterator<>(this.tree);
+		Iterator<Position<String>> iterator = new DepthFirstTreePositionsIterator<>(this.tree);
 		while (iterator.hasNext()) {
 			s.append(iterator.next().getElement());
 		}
@@ -284,7 +285,7 @@ public class LinkedTreeTest {
 		this.tree.swapElements(p2, p3);
 		
 		String salida = "";
-		for (Position<String> e : this.tree) {
+		for (Position<String> e : this.tree.positions()) {
 			salida += e.getElement();
 		}
 		Assertions.assertEquals(salida, "CBADEHGFIJKL");
@@ -311,7 +312,7 @@ public class LinkedTreeTest {
 		this.tree.replace(p3, "W");
 		
 		String salida = "";
-		for (Position<String> e : this.tree) {
+		for (Position<String> e : this.tree.positions()) {
 			salida += e.getElement();
 		}
 		Assertions.assertEquals(salida, "XBYDEZGWIJKL");

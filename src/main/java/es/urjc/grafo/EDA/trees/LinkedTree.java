@@ -52,17 +52,29 @@ public class LinkedTree<E> implements NAryTree<E> {
     }
 
     /**
+     * Returns true if Position p does not have any children.
+     *
+     * @param p A valid Position within the tree
+     * @return true if p has zero children, false otherwise
+     * @throws IllegalArgumentException if p is not a valid Position for this tree.
+     */
+    @Override
+    public boolean isExternal(Position<E> p) throws IllegalArgumentException {
+        TreeNode<E> node = checkPosition(p);
+        // TODO
+        throw  new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
      * Returns whether a node is external.
      *
      * @param position
      * @return
      */
-    @Override
     public boolean isLeaf(Position<E> position) {
-        TreeNode<E> node = checkPosition(position);
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.isExternal(position);
     }
+
 
     /**
      * Returns whether a node is the root.
@@ -116,14 +128,43 @@ public class LinkedTree<E> implements NAryTree<E> {
     }
 
     /**
+     * Returns the number of children of Position p.
+     *
+     * @param position A valid Position within the tree
+     * @return number of children of Position p
+     * @throws IllegalArgumentException if p is not a valid Position for this tree.
+     */
+    @Override
+    public int numChildren(Position<E> position) throws IllegalArgumentException {
+        TreeNode<E> node = checkPosition(position);
+        return node.children.size();
+    }
+
+    /**
      * Returns an iterator of the elements stored at the nodes. The nodes are
      * visited according to a breath-first search
      */
     @Override
-    public Iterator<Position<E>> iterator() {
+    public Iterator<E> iterator() {
         return new BreadthFirstTreeIterator<>(this); // An iterator of elements
     }
 
+    /**
+     * Returns an iterable collection of the positions of the tree.
+     *
+     * @return iterable collection of the tree's positions
+     */
+    @Override
+    public Iterable<Position<E>> positions() {
+        return new PositionsIterable();
+    }
+
+    private class PositionsIterable implements Iterable<Position<E>> {
+        @Override
+        public Iterator<Position<E>> iterator() {
+            return new BreadthFirstTreePositionsIterator<>(LinkedTree.this);
+        }
+    }
 
     /**
      * Replaces element at position by the new element received
@@ -220,7 +261,7 @@ public class LinkedTree<E> implements NAryTree<E> {
         }
 
         // Update size of the tree
-        Iterator<Position<E>> iterator = new BreadthFirstTreeIterator<>(this, position);
+        Iterator<Position<E>> iterator = new BreadthFirstTreePositionsIterator<>(this, position);
         while (iterator.hasNext()) {
             iterator.next();
             this.size--;

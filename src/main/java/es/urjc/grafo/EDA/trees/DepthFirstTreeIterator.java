@@ -2,34 +2,31 @@ package es.urjc.grafo.EDA.trees;
 
 import es.urjc.grafo.EDA.utils.Position;
 
-import java.util.*;
+import java.util.Iterator;
 
-public class DepthFirstTreeIterator<T> implements Iterator<Position<T>> {
+public class DepthFirstTreeIterator<T> implements Iterator<T> {
+
+    Iterator<Position<T>> positionsIterator;
 
     public DepthFirstTreeIterator(Tree<T> tree, Position<T> root) {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.positionsIterator = new DepthFirstTreePositionsIterator<>(tree, root);
     }
 
     public DepthFirstTreeIterator(Tree<T> tree) {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet.");
+        this(tree, tree.root());
     }
 
     @Override
     public boolean hasNext() {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.positionsIterator.hasNext();
     }
 
     /**
      * This method visits the nodes of a tree by following a depth-first order
      */
     @Override
-    public Position<T> next() {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet.");
+    public T next() {
+        return this.positionsIterator.next().getElement();
     }
-
 
 }
